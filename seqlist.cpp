@@ -35,12 +35,31 @@ void listprint(SqList L) {
 }
 int locate(SqList& L, int x) {
     for (int i = L.length; i >=1; i--) {
+        int a = 0;
         if (L.data[i] == x) {
-            cout << i-1 << endl;
-            return i-1;
+            a = i;
+            cout << a << endl;
+        }
+        return a;
+    }
+}
+void Inverse(SqList& L) {
+    int i, temp;
+    for (i = 0; i < L.length / 2; i++) {
+        temp = L.data[i];
+        L.data[i] = L.data[L.length - 1 - i];
+        L.data[L.length - 1 - i] = temp;
+    }
+}
+void delsame(SqList& L) {
+    for (int i = 0; i <= L.length; i++) {
+        int a = L.data[i];
+        for (int j = i + 1; j <= L.length; j++) {
+            if (L.data[j] == a) {
+                deletet(L, j);
+            }
+        }
 
-        }cout << "²»´æÔÚ" << endl;
-        return 0;
-  
+
     }
 }

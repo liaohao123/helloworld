@@ -9,4 +9,6 @@ struct SqList {
 void insert(SqList& L, int i, int x);// 插入顺序表的第i个元素
 void deletet(SqList& L, int i);//删除
 void listprint(SqList L);//打印
-int locate(SqList& L, int x);
+int locate(SqList& L, int x);//查找
+void Inverse(SqList& L);//逆序
+void delsame(SqList& L);//查找重复
