@@ -162,6 +162,8 @@ c++中对文件操作需要包含头文件`****<fstream>****`
 
 ### 读文件
 
+#### 1.右移方法
+
 1. 包含头文件
    **#include<fstream>**
 2. 创建流对象
@@ -181,3 +183,88 @@ out就是从程序中输出到文件中
 读文件使用循环代码while（ifs >>  buf）
 
 buf是一个数组；要把文件中的数据读进buf这个数组中 来就需要一行一行录入，右移允许算符相当于读取运算符，知道读到最后一个字符变成空的时候才结束进行
+
+#### 2.ifstream.getline（）
+
+同样可以 使用getline函数读取数据getline函数中包含两个数据
+
+例如getline（读取的数组，需要读取的长度），如果需要将数组填满则需要第二个长度与数组大小相同。
+
+#### 3.string buf，使用全局区的getline
+
+使用全局函数下的getline（）函数里面的参数是初始化的ifstream输入流对象
+
+getline（输入流对象，buf），前提初始化一个string类型的对象
+
+#### 4.char 个字符
+
+初始化一个char  C;
+
+while（(C != ifs.get()) != EOF）//EOF是文档尾部，这样也可以读取整个文档内容
+
+### 二进制文件呢ios::binary
+
+创建一下ofstream类型对象
+
+```c++
+// *创建一个写二进制的独享*
+
+*void* test06()
+
+{
+
+  ofstream write;
+
+  write.open("*person.txt*", ios::out *|* ios::binary);
+
+  person p = {"*张三*", 18};
+
+  write.write((*const* *char* *)&p, *sizeof*(person));
+
+  write.close();
+
+}
+
+// *读二进制的文件*
+
+*void* test07()
+
+{
+
+  ifstream read;
+
+  read.open("*person.txt*", ios::in *|* ios::binary);
+
+  *if* (!read.is_open())
+
+  {
+
+​    cout *<<* "*打开失败*" *<<* endl;
+
+  }
+
+  person p;
+
+  read.read((*char* *)&p, *sizeof*(p));
+
+  // *读取文件的内容相当于存进初始化的p*
+
+  // *打印输出的时候输出p.name和p.age*
+
+  cout *<<* p.m_Name *<<* p.m_Age *<<* endl;
+
+  //*最后一步关闭文件*
+
+  read.close();
+
+}
+```
+
+写入文件（从代码写入到文本文件呢）是out，输出代码中的对象内容到文件中
+
+读取文件（从文本文件读取到代码中） 是in，读取文本文件的内容到代码中的对象中
+
+其中的write函数中包含的应该是常量*数据类型 和数据占有的内存大小
+
+read函数中包含的是数据类型*，和应该 写入数据类型的大小。
+
