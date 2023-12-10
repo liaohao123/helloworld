@@ -268,3 +268,135 @@ while（(C != ifs.get()) != EOF）//EOF是文档尾部，这样也可以读取�
 
 read函数中包含的是数据类型*，和应该 写入数据类型的大小。
 
+
+
+
+
+
+
+## 模板
+
+### 泛型编程，主要利用技术就是模板
+
+#### 语法：template<typename T>
+
+template --声明创建模板
+
+typename --模板名称
+
+
+
+模板中有两种用法一个是**自动类型推导**和**显示指定类型**
+
+自动类型推到例如：mySwap（a，b）
+
+显示指定类型： mySwap<int>（a，b）
+
+模板函数调用规则：如果有符合的非模板函数，先调用非模板函数，如果没有则编译器自己调用模板函数自己推导
+
+### 模板的局限性
+
+无法对特定类型的数据进行推导，有些特定的数据类型需要具体方式做特殊实现
+
+利用具体化的模板，可以解决自定义类型的通用化相当于重载
+
+### 类模板
+
+template<typename T>
+
+class
+
+紧接着一个类说明要写一个类模板
+
+### 类模板与函数模板的区别
+
+类模板中不能用自动类型推导，函树模板两个都可以
+
+### 类模板与继承
+
+继承的时候要明确继承的类型，如果不告诉继承的
+
+类外实现 例子：
+
+template<class T 1,class T2>
+
+void   person<T1,T2>::person(T1 t,T2 t)
+
+### 类模板模块化
+
+份文件编写语法不会报错，但是模板无法连接在一起包含文件源文件.cpp不会生成错误，编译器是在编译阶段才会推导数据类型。
+
+## STL
+
+STL六大组件：**容器、算法、迭代器、仿函数、适配器、空间配置器**
+
+1. 容器：各种数据结构：vector、list、deque、set、map
+2. 算法：各种常用算法：sort、find、copy、for_each
+3. 迭代器：扮演了容器与算法之间的胶合剂
+4. 仿函数：行为类似函数，可作为算法的某种策略
+
+### STL中的容器（Containers）、算法（Algorithms）、迭代器（iterators）
+
+要包含头文件#include<vector>
+
+#include<algorithms>
+
+想要遍历容器中的数据需要包含算法头文件调用函数for_each
+
+初始化一个容器vector<int>  v
+
+v中包含v.begin和v.end分别认为是指向容器数据中的第一个数据和最后一个数据的后一个数据的指针
+
+for_each(v.begin；v.end；调用的函数)
+
+解释： for_each中第一个参数与第二个参数不相等则调用第三个参数中的函数，然后进行第一个参数的++运算
+
+同时遍历元素可以用到for循环
+
+for（vector<int> :: iterators it=v.begin;it != v.end;i++）
+
+在for循环中初始化一个iterators迭代器
+
+***for*(*auto* i = v.bigen; i < v.end; i++)**
+
+<u>次遍历方法中输出的应该是*it 因为迭代器本身是一个指针形式的数据，不能直接输出</u>
+
+**在C++中，auto关键字可以用于声明变量时根据变量的初始值自动推导变量的类型**
+
+```c++
+#include <vector>
+#include <algorithm>
+int myprint(int v)
+{
+    cout << v << endl;
+}
+void test01()
+{
+    vector<int> v;
+    v.push_back(10);
+    v.push_back(20);
+    v.push_back(30);
+    v.push_back(40);
+    v.push_back(50);
+    // 通过迭代器访问容器中的数据
+    for (vector<int>::iterator it = v.begin(); it != v.end(); it++)
+    {
+        //迭代器是指针
+        cout << *it << endl;
+    }
+    // for_each中第一个参数与第二个参数不相等则调用第三个参数中的函数，然后进行第一个参数的++运算
+    for_each(v.begin(),v.end(), myprint);
+    // 以上链各个方法都可以遍历容器中的数据
+    for (auto i = v.begin(); i < v.end(); i++)
+    {
+       cout<<*i<<endl;//迭代器只是一个指针，如果直接打印输出只会打印出地址
+    }
+    for(auto &x : v)
+    {   
+        cout<<x<<" ";
+    }
+}
+```
+
+**新方法for（auto x：v）同时适用于普通遍历**
+
