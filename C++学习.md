@@ -23,11 +23,19 @@
 
 ##### 通过类名访问
 
-例如：cout<<son::m_A<<endl;
+例如：
+
+```c++
+cout<<son::m_A<<endl;
+```
 
 通过子类继承的访问父类下的静态成员
 
-例如：cout<<son::base::m_A;
+例如：
+
+```c++
+cout<<son::base::m_A;
+```
 
 同时函数也可以这样调用
 
@@ -81,7 +89,11 @@ vfptr是虚函数的指针，虚函数只会占1的空间，一个指针占4个�
 
 #### 纯虚函数用法：virtual 返回值类型 函数名 （参数列表） =0
 
-例如：virtual void func（）=0；
+例如：
+
+```
+virtual void func（）=0；
+```
 
 当类中有了纯虚函数这个类也变成了抽象类 
 
@@ -146,15 +158,34 @@ c++中对文件操作需要包含头文件`****<fstream>****`
 步骤：
 
 1. 包含头文件
-   **#include<fstream>**
+   
+   ```
+   #include<fstream>
+   ```
+   
+   
+   
 2. 创建流对象
    ofstream ofs
+   
 3. 打开文件
+   
+   ```
    ofs.open（“文件路径”，打开方式）；
+   ```
+   
+   
+   
 4. 写数据
    ofs<<"写入的数据"；ofs相当于cout，cout输出在屏幕，ofs输出屏幕
+   
 5. 关闭文件
+   
+   ```
    ofs.close（）；
+   ```
+   
+   
 
 文件打开方式：
 
@@ -165,16 +196,39 @@ c++中对文件操作需要包含头文件`****<fstream>****`
 #### 1.右移方法
 
 1. 包含头文件
-   **#include<fstream>**
-2. 创建流对象
+   
+   ```c++
+   1. #include<fstream>
+   2. 
+   ```
+   
+   创建流对象
+   
+   ```c++
    ifstream ifs
-3. ifs.if_open()是否成果打开文件是一个bool类型返回值的函数
+   ```
+   
+   
+   
+2. ifs.if_open()是否成果打开文件是一个bool类型返回值的函数
+
 4. 打开文件
-   ifs.open（“文件路径”，打开方式）；
-5. 写数据
+   
+   ```c++
+   1. ifs.open（“文件路径”，打开方式）；
+   2. 
+   ```
+   
+   写数据
    ifs<<"写入的数据"；ifs中的i是in的意思，意思就是从程序中输入文件中的数据
+   
 6. 关闭文件
+   
+   ```c++
    ifs.close（）；
+   ```
+   
+   
 
 in就是从文件中输入进程序中
 
@@ -278,7 +332,11 @@ read函数中包含的是数据类型*，和应该 写入数据类型的大小�
 
 ### 泛型编程，主要利用技术就是模板
 
-#### 语法：template<typename T>
+#### 语法：
+
+```c++
+template<typename T>
+```
 
 template --声明创建模板
 
@@ -288,9 +346,17 @@ typename --模板名称
 
 模板中有两种用法一个是**自动类型推导**和**显示指定类型**
 
-自动类型推到例如：mySwap（a，b）
+自动类型推到例如：
 
-显示指定类型： mySwap<int>（a，b）
+```c++
+mySwap（a，b）
+```
+
+显示指定类型：
+
+```c++
+ mySwap<int>（a，b）
+```
 
 模板函数调用规则：如果有符合的非模板函数，先调用非模板函数，如果没有则编译器自己调用模板函数自己推导
 
@@ -302,7 +368,9 @@ typename --模板名称
 
 ### 类模板
 
+```c++
 template<typename T>
+```
 
 class
 
@@ -318,9 +386,13 @@ class
 
 类外实现 例子：
 
+```c++
 template<class T 1,class T2>
 
 void   person<T1,T2>::person(T1 t,T2 t)
+```
+
+
 
 ### 类模板模块化
 
@@ -343,7 +415,11 @@ STL六大组件：**容器、算法、迭代器、仿函数、适配器、空间
 
 想要遍历容器中的数据需要包含算法头文件调用函数for_each
 
-初始化一个容器vector<int>  v
+初始化一个容器
+
+```c++
+vector<int>  v
+```
 
 v中包含v.begin和v.end分别认为是指向容器数据中的第一个数据和最后一个数据的后一个数据的指针
 
@@ -353,11 +429,15 @@ for_each(v.begin；v.end；调用的函数)
 
 同时遍历元素可以用到for循环
 
+```c++
 for（vector<int> :: iterators it=v.begin;it != v.end;i++）
+```
 
 在for循环中初始化一个iterators迭代器
 
-***for*(*auto* i = v.bigen; i < v.end; i++)**
+```c++
+for(auto i = v.bigen; i < v.end; i++)
+```
 
 <u>次遍历方法中输出的应该是*it 因为迭代器本身是一个指针形式的数据，不能直接输出</u>
 
@@ -400,3 +480,284 @@ void test01()
 
 **新方法for（auto x：v）同时适用于普通遍历**
 
+##### vector嵌套容器
+
+```c++
+vector<vector<int>>  v
+```
+
+嵌套容器循环需要嵌套循环才能遍历
+
+### string基本概念
+
+string（）空构造
+
+string(const* s)
+
+## 多线程
+
+### 数据库的基本使用
+
+多线程中函数的调用
+
+```c++
+#include<thread>//需要包含的头文件名
+#include<iostream>
+#include<string>
+using namespace std;
+void print_helloworld(string msg)
+{
+    cout<<msg<<endl;
+}
+
+int main()
+{
+    std::thread thread1(print_helloworld,"fuck you");
+//主程序不会等子程序结束然后结束，调用jion函数可以检查子进程有没有结束
+    thread1.join();
+//调用detach主城不会等子程序运行结束，但是子程序会在后台运行   
+    thread.detach()
+   //使用一个bool值接受jionable的jionable的返回值
+    bool isjion = thread1.joinable();
+    //如果可以jion则调用jion函数
+    if(isjion)
+    {
+        //因为jion函数jion函数只能调用一次所以要判断
+        thread1.join();
+    }
+    return 0;
+}
+```
+
+C++中的join函数用于等待子线程结束并返回子线程的执行结果。当调用join函数时，主线程会阻塞直到子线程执行完毕，然后才会继续执行。因此，可以将join函数视为声明子线程结束的标志。在子线程执行完毕后，可以通过join函数获取子线程的执行结果，或者进行其他相关的操作。
+
+### 线程函数中的数据未定义错误
+
+\1. 传递临时变量的问题：
+
+
+
+```c++
+#include <iostream>
+#include <thread>
+void foo(int& x) {
+    x += 1;
+}
+int main() {
+    std::thread t(foo, 1); // 传递临时变量
+    t.join();
+    return 0;
+}
+```
+
+
+
+在这个例子中，我们定义了一个名为`foo`的函数，它接受一个整数引用作为参数，并将该引用加1。然后，我们创建了一个名为`t`的线程，将`foo`函数以及一个临时变量`1`作为参数传递给它。这样会导致在线程函数执行时，临时变量`1`被销毁，从而导致未定义行为。
+
+
+
+解决方案是将变量复制到一个持久的对象中，然后将该对象传递给线程。例如，我们可以将`1`复制到一个`int`类型的变量中，然后将该变量的引用传递给线程。
+
+
+
+```c++
+#include <iostream>
+#include <thread>
+void foo(int& x) {
+    x += 1;
+}
+int main() {
+    int x = 1; // 将变量复制到一个持久的对象中
+    std::thread t(foo, std::ref(x)); // 将变量的引用传递给线程
+    t.join();
+    return 0;
+}
+```
+
+
+
+\2. 传递指针或引用指向局部变量的问题：
+
+
+
+```c++
+#include <iostream>
+#include <thread>
+void foo(int* ptr) {
+    std::cout << *ptr << std::endl; // 访问已经被销毁的指针
+}
+int main() {
+    int x = 1;
+    std::thread t(foo, &x); // 传递指向局部变量的指针
+    t.join();
+    return 0;
+}
+```
+
+
+
+在这个例子中，我们定义了一个名为`foo`的函数，它接受一个整型指针作为参数，并输出该指针所指向的整数值。然后，我们创建了一个名为`t`的线程，将`foo`函数以及指向局部变量`x`的指针作为参数传递给它。这样会导致在线程函数执行时，指向局部变量`x`的指针已经被销毁，从而导致未定义行为。
+
+
+
+解决方案是将指针或引用指向堆上的变量，或使用`std::shared_ptr`等智能指针来管理对象的生命周期。例如，我们可以使用`new`运算符在堆上分配一个整数变量，并将指针指向该变量。
+
+
+
+```c++
+#include <iostream>
+#include <thread>
+void foo(int* ptr) {
+    std::cout << *ptr << std::endl;
+    delete ptr; // 在使用完指针后，需要手动释放内存
+}
+int main() {
+    int* ptr = new int(1); // 在堆上分配一个整数变量
+    std::thread t(foo, ptr); // 将指针传递给线程
+    t.join();
+    return 0;
+}
+```
+
+
+
+\3. 传递指针或引用指向已释放的内存的问题：
+
+
+
+```c++
+#include <iostream>
+#include <thread>
+void foo(int& x) {
+    std::cout << x << std::endl; // 访问已经被释放的内存
+}
+int main() {
+    int* ptr = new int(1);
+    std::thread t(foo, *ptr); // 传递已经释放的内存
+    delete ptr;
+    t.join();
+    return 0;
+}
+```
+
+
+
+在这个例子中，我们定义了一个名为`foo`的函数，它接受一个整数引用作为参数，并输出该引用的值。然后，我们创建了一个名为`t`的线程，将`foo`函数以及一个已经被释放的指针所指向的整数值作为参数传递给它解决方案是确保在线程函数执行期间，被传递的对象的生命周期是有效的。例如，在主线程中创建并初始化对象，然后将对象的引用传递给线程。
+
+
+
+```c++
+#include <iostream>
+#include <thread>
+void foo(int& x) {
+    std::cout << x << std::endl;
+}
+int main() {
+    int x = 1;
+    std::thread t(foo, std::ref(x)); // 将变量的引用传递给线程
+    t.join();
+    return 0;
+}
+```
+
+
+
+在这个例子中，我们创建了一个名为`x`的整数变量，并初始化为`1`。然后，我们创建了一个名为`t`的线程，将`foo`函数以及变量`x`的引用作为参数传递给它。这样可以确保在线程函数执行期间，变量`x`的生命周期是有效的。
+
+
+
+\4. 类成员函数作为入口函数，类对象被提前释放
+
+
+
+错误示例：
+
+```c++
+#include <iostream>
+#include <thread>
+
+class MyClass {
+public:
+    void func() {
+        std::cout << "Thread " << std::this_thread::get_id() 
+        << " started" << std::endl;
+        // do some work
+        std::cout << "Thread " << std::this_thread::get_id() 
+        << " finished" << std::endl;
+    }
+};
+
+int main() {
+    MyClass obj;
+    std::thread t(&MyClass::func, &obj);//
+    // obj 被提前销毁了，会导致未定义的行为
+    return 0;
+}
+```
+
+上面的代码中，**在创建线程之后，obj 对象立即被销毁了，这会导致在线程执行时无法访问 obj 对象，可能会导致程序崩溃或者产生未定义的行为。**
+
+为了避免这个问题，可以使用 std::shared_ptr 来管理类对象的生命周期，确保在线程执行期间对象不会被销毁。具体来说，可以在创建线程之前，将类对象的指针封装在一个 std::shared_ptr 对象中，并将其作为参数传递给线程。这样，在线程执行期间，即使类对象的所有者释放了其所有权，std::shared_ptr 仍然会保持对象的生命周期，直到线程结束。
+
+以下是使用 std::shared_ptr 修复上面**错误**的示例：
+
+```c++
+#include <iostream>
+#include <thread>
+#include <memory>
+
+class MyClass {
+public:
+    void func() {
+        std::cout << "Thread " << std::this_thread::get_id() 
+        << " started" << std::endl;
+        // do some work
+        std::cout << "Thread " << std::this_thread::get_id() 
+        << " finished" << endl;
+    }
+};
+
+int main() {
+    shared_ptr<MyClass> obj = make_shared<MyClass>();
+    std::thread t(&MyClass::func, obj);
+    t.join();
+    return 0;
+}
+```
+
+上面的代码中，使用 make_shared 创建了一个 MyClass 类对象，并将其封装在一个 std::shared_ptr 对象中。然后，将 std::shared_ptr 对象作为参数传递给线程。这样，在线程执行期间，即使 obj 对象的所有者释放了其所有权，std::shared_ptr 仍然会保持对象的生命周期，直到线程结束。
+
+**智能指针相当于代码中的模板**
+
+
+
+5.入口函数为类的私有成员函数
+
+```c++
+#include <iostream>
+#include <thread>
+
+class MyClass {
+private:
+	friend void myThreadFunc(MyClass* obj);
+	void privateFunc()
+	{
+		std::cout << "Thread " 
+		<< std::this_thread::get_id() << " privateFunc" << std::endl;
+	}
+};
+
+void myThreadFunc(MyClass* obj) 
+{
+	obj->privateFunc();
+}
+
+int main() {
+	MyClass obj;
+	std::thread thread_1(myThreadFunc, &obj);
+	thread_1.join();
+	return 0;
+}
+```
+
+上面的代码中，将 `myThreadFunc` 定义为 `MyClass` 类的友元函数，并在函数中调用 `privateFunc` 函数。在创建线程时，需要将类对象的指针作为参数传递给线程。
